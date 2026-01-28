@@ -1,11 +1,21 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from fastapi_users import schemas
+from datetime import datetime
 import uuid
 
 
 class PostCreate(BaseModel):
-    title: str
-    content: str
+    id: uuid.UUID
+    user_id: uuid.UUID
+    caption: str | None
+    url: str
+    file_type: str
+    file_name: str
+    created_at: datetime
+    email: str 
+    is_owner: bool
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PostResponse(BaseModel):
